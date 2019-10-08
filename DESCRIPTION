@@ -20,4 +20,5 @@ RoxygenNote: 6.1.1
 Imports:
     tools,
     utils
-
+Suggests: 
+    testthat (>= 2.1.0)
