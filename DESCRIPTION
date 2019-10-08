@@ -1,13 +1,23 @@
 Package: WIODnet
-Title: What the Package Does (One Line, Title Case)
+Title: Creates long tables from WIOD data and carry network calculations
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Altay",
+           family = "Özaygen",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "altay.ozaygen@gmail.com",
+           comment = c(ORCID = "0000-0001-5594-5245"))
+Description: This package downloads WIOD data, then creates yearly long
+    tables. It also aggregates the manufacturing industry with respect
+    to its technological intensity, a Eurostat categorization of the
+    manufacturing industry. WIOD files are from 2000 to 2014, they include
+    56 industries from 44 countries and the rest of the world (RoW). WIOD
+    data also comprises final consumption data, VA values, etc.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Imports:
+    tools,
+    utils
+
