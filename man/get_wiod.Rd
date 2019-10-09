@@ -2,28 +2,21 @@
 % Please edit documentation in R/get_wiod.R
 \name{get_wiod}
 \alias{get_wiod}
-\title{A function to donwload WIOD zip file from the project web page.  The
+\title{A function to donwload WIOD zip file from the project web page. The
 downloaded file is the 2016 version which contains RData for each
 year for the period 2000:2014. The integrity of the downloaded file
-is checked with md5sum.}
+is checked with md5sum if it passes then it is unziped.}
 \usage{
-get_wiod(download_dir, data_URL)
-}
-\arguments{
-\item{download_dir}{The directory into which the zip file is downloaded}
-
-\item{data_URL}{The URL adress of the original WIOD data}
+get_wiod()
 }
 \description{
-A function to donwload WIOD zip file from the project web page.  The
+A function to donwload WIOD zip file from the project web page. The
 downloaded file is the 2016 version which contains RData for each
 year for the period 2000:2014. The integrity of the downloaded file
-is checked with md5sum.
+is checked with md5sum if it passes then it is unziped.
 }
 \examples{
-# Download to the default directory (wiod_original_data) and from
-# the default URL.
-
-# Download to the user defined directory
+# Download the zip file to the default directory (wiod_original_data)
+# from the default URL.
 
 }

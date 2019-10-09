@@ -9,52 +9,51 @@
 #' # Download the zip file to the default directory (wiod_original_data)
 #' # from the default URL.
 #'
-#' @importFrom utils download.file
+#' @import utils
 #'
 #' @importFrom tools md5sum
 #' 
-get_wiod <- function() {
+getWIOD <- function() {
     ## setting the download_dir as a global value
-    download_dir <<- "./wiod_orginal_data"
-    data_URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
+    download.dir <<- "./wiod_orginal_data"
+    data.URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
 
     ## create the directory to download
-    dir.create(download_dir, showWarnings = FALSE)
+    dir.create(download.dir, showWarnings = FALSE)
 
     ## set the directory and the file name to download 
-    original_file  <- paste0(download_dir, "/wiot_r_Nov16.zip")
+    original.file  <- paste0(download.dir, "/wiot_r_Nov16.zip")
 
     ## check if the downloaded file exist, if not start download
-    if (!file.exists(original_file)) {
+    if (!file.exists(original.file)) {
         res <- tryCatch(download.file(data_URL,
-                                      destfile = original_file,
+                                      destfile = original.file,
                                       method = "auto"),
                         error=function(e) 1)
 
         ## check the integrity of the downloaded file
-        check_wiod(original_file)
+        checkWIOD(original.file)
         
     } else {
         ## check the integrity of the allready downloaded file
-        check_wiod(original_file)
+        checkWIOD(original.file)
     }
 }
 
-check_wiod <- function(original_file) {
+checkWIOD <- function(original.file) {
     
     ## obtained from the downloaded file
-    md5sum_wiod <- "8d313ac0c9f113e16ac66e8c7fe5bf51"
+    md5sum.wiod <- "8d313ac0c9f113e16ac66e8c7fe5bf51"
 
-    if (! identical(as.vector(md5sum(original_file)), md5sum_wiod)) {
+    if (! identical(as.vector(md5sum(original.file)), md5sum.wiod)) {
         message("md5sum is NOT good.")
     } else {
         message("md5sum is good.")
         ## downloaded file is legit, now extracting to the director
         ## where it is downloaded
-        unzip(original_file, exdir=download_dir)
+        unzip(original.file, exdir=download.dir)
     }
 }
-
 
 skip_if_no_download <- function() {
     if(TRUE) {
