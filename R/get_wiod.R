@@ -1,7 +1,7 @@
-#' A function to donwload WIOD zip file from the project web page.  The
+#' A function to donwload WIOD zip file from the project web page. The
 #' downloaded file is the 2016 version which contains RData for each
 #' year for the period 2000:2014. The integrity of the downloaded file
-#' is checked with md5sum.
+#' is checked with md5sum if it passes then it is unziped.
 #'
 #' @usage get_wiod(download_dir, data_URL)
 #'
@@ -53,6 +53,9 @@ check_wiod <- function(original_file) {
         message("md5sum is NOT good.")
     } else {
         message("md5sum is good.")
+        ## downloaded file is legit, now extracting to the director
+        ## where it is downloaded
+        unzip(original_file, exdir=download_dir)
     }
 }
 
