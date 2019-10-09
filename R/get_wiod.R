@@ -3,24 +3,20 @@
 #' year for the period 2000:2014. The integrity of the downloaded file
 #' is checked with md5sum if it passes then it is unziped.
 #'
-#' @usage get_wiod(download_dir, data_URL)
-#'
-#' @param download_dir The directory into which the zip file is downloaded
-#'
-#' @param data_URL The URL adress of the original WIOD data
+#' @usage get_wiod()
 #'
 #' @examples
-#' # Download to the default directory (wiod_original_data) and from
-#' # the default URL.
+#' # Download the zip file to the default directory (wiod_original_data)
+#' # from the default URL.
 #'
-#' # Download to the user defined directory
-#' 
 #' @importFrom utils download.file
 #'
 #' @importFrom tools md5sum
 #' 
-get_wiod <- function(download_dir = "./wiod_orginal_data",
-                     data_URL = "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip") {
+get_wiod <- function() {
+    ## setting the download_dir as a global value
+    download_dir <<- "./wiod_orginal_data",
+    data_URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
 
     ## create the directory to download
     dir.create(download_dir, showWarnings = FALSE)
