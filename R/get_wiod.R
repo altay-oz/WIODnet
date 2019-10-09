@@ -15,7 +15,7 @@
 #' 
 get_wiod <- function() {
     ## setting the download_dir as a global value
-    download_dir <<- "./wiod_orginal_data",
+    download_dir <<- "./wiod_orginal_data"
     data_URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
 
     ## create the directory to download
