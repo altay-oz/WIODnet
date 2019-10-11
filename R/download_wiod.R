@@ -1,21 +1,17 @@
-#' A function to donwload WIOD zip file from the project web page. The
-#' downloaded file is the 2016 version which contains RData for each
-#' year for the period 2000:2014. The integrity of the downloaded file
-#' is checked with md5sum if it passes then it is unziped.
+#' Download the WIOD zip file from its web site.
 #'
-#' @usage get_wiod()
+#' @description Download WIOD zip file from the project web page. The
+#'     downloaded file is the 2016 version which contains RData for each
+#'     year for the period 2000:2014. The integrity of the downloaded
+#'     file is checked with md5sum if it passes then it is unziped.
 #'
-#' @examples
-#' # Download the zip file to the default directory (wiod_original_data)
-#' # from the default URL.
+#' @param download.dir directory to download the original WIOD data. 
 #'
 #' @import utils
 #'
 #' @importFrom tools md5sum
 #' 
-getWIOD <- function() {
-    ## setting the download_dir as a global value
-    download.dir <<- "./wiod_orginal_data"
+downloadWIOD <- function(download.dir) {
     data.URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
 
     ## create the directory to download
@@ -46,7 +42,7 @@ checkWIOD <- function(original.file) {
     md5sum.wiod <- "8d313ac0c9f113e16ac66e8c7fe5bf51"
 
     if (! identical(as.vector(md5sum(original.file)), md5sum.wiod)) {
-        message("md5sum is NOT good.")
+        stop("md5sum is NOT good.")
     } else {
         message("md5sum is good.")
         ## downloaded file is legit, now extracting to the director
@@ -60,4 +56,3 @@ skip_if_no_download <- function() {
         skip("No download is possible or download is too long.")
     }
 }
-
