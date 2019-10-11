@@ -1,5 +1,7 @@
-#' A function which creates a data frame of technology intensity for all
-#' NACE coded industries in WIOD files.
+#' Create a data frame for technology intensity.
+#'
+#' @description Create a data frame of technology intensity as defined
+#'     by EUROSATAT for all NACE coded industries in WIOD files.
 #'
 #' @usage get_tech_intensity()
 #'
