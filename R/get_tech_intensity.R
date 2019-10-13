@@ -3,8 +3,8 @@
 #' @description Create a data frame of technology intensity as defined
 #'     by EUROSATAT for all NACE coded industries in WIOD files.
 #'
-#' @usage get_tech_intensity()
-#'
+#' @param yearly.raw yearly raw data from the downloaded zip such as WIOT2011_October16_ROW.RData
+#' 
 #' @import dplyr
 #'
 #' @import magrittr
