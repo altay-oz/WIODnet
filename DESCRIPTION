@@ -7,6 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "altay.ozaygen@gmail.com",
            comment = c(ORCID = "0000-0001-5594-5245"))
+Author: Altay Özaygen [aut, cre],
+Maintainer: Altay Özaygen <altay.ozaygen@gmail.com>
 Description: This package downloads WIOD data, then creates yearly long
     tables. It also aggregates the manufacturing industry with respect
     to its technological intensity, a Eurostat categorization of the
@@ -18,6 +20,9 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports:
+    dplyr,
+    magrittr,
+    tidyr,
     tools,
     utils
 Suggests: 
