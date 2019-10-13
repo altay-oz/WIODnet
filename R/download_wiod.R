@@ -42,9 +42,9 @@ checkWIOD <- function(original.file) {
     md5sum.wiod <- "8d313ac0c9f113e16ac66e8c7fe5bf51"
 
     if (! identical(as.vector(md5sum(original.file)), md5sum.wiod)) {
-        stop("md5sum is NOT good.")
+        stop("md5sum of the downloaded file is NOT good.")
     } else {
-        message("md5sum is good.")
+        message("md5sum of the dowloaded is good, unzipping and continuing on creating long files.")
         ## downloaded file is legit, now extracting to the director
         ## where it is downloaded
         unzip(original.file, exdir=download.dir)
