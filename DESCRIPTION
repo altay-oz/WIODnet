@@ -1,13 +1,18 @@
 Package: WIODnet
 Title: Creates long tables from WIOD data and carry network calculations
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Altay",
            family = "Özaygen",
            role = c("aut", "cre"),
            email = "altay.ozaygen@gmail.com",
-           comment = c(ORCID = "0000-0001-5594-5245"))
-Author: Altay Özaygen [aut, cre],
+           comment = c(ORCID = "0000-0001-5594-5245")),
+    person(given = "Keoungoui",
+           family = "Kim",
+           role = c("ctb"),
+           email = "awekimm@gmail.com",
+           comment = c(ORCID = "0000-0002-0839-8813")))
+Author: Altay Özaygen [aut, cre], Keoungoui Kim [ctb]
 Maintainer: Altay Özaygen <altay.ozaygen@gmail.com>
 Description: This package downloads WIOD data, then creates yearly long
     tables. It also aggregates the manufacturing industry with respect
