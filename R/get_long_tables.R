@@ -9,10 +9,6 @@
 #'
 getLongTables <- function(file.name) {
 
-    ## insert a RDATA WIOT file and obtain a long data
-
-    ##yearly.raw <- get(load("/home/altay/ARASTIRMA/R_notes/package_development/trial_area/wiod_orginal_data/WIOT2001_October16_ROW.RData"))
-    
     yearly.raw <- get(load(file.name))
     
     year <- unique(yearly.raw$Year)
