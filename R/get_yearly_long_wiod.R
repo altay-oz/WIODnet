@@ -10,8 +10,8 @@
 #'     downloaded and unziped, Default: "./wiod_original_data"
 #'
 #' @examples
-#' # Downloading the zip file to the default directory (wiod_orginal_data)
-#' \dontrun{getWIOD(dir =  "./wiod_orginal_data")}
+#' # Downloading the zip file to the default directory (wiod_original_data)
+#' \dontrun{getWIOD(dir =  "./wiod_original_data")}
 #' 
 #' # Downloading the original zip file to the /user/defined/directory.
 #' \dontrun{getWIOD("/user/defined/directory")}
