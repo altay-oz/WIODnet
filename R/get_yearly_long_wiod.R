@@ -4,10 +4,10 @@
 #'     create yearly long tables from the original WIOD file. All long
 #'     tables are also saved.
 #'
-#' @usage getWIOD(dir = "./wiod_orginal_data")
+#' @usage getWIOD(dir = "./wiod_original_data")
 #'
 #' @param dir The directory into which the original WIOD zip file is
-#'     downloaded and unziped, Default: "./wiod_orginal_data"
+#'     downloaded and unziped, Default: "./wiod_original_data"
 #'
 #' @examples
 #' # Downloading the zip file to the default directory (wiod_orginal_data)
@@ -19,7 +19,7 @@
 #' @import dplyr
 #'
 #' @export
-getWIOD <- function(dir =  "./wiod_orginal_data") {
+getWIOD <- function(dir =  "./wiod_original_data") {
 
     ## setting the download_dir as a global value
     download.dir <<- dir
