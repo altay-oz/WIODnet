@@ -1,7 +1,7 @@
 test_that("obtain long network table", {
 
     ## network matrix
-    w2002.IO <<- get(load("C:/Users/Kengoui KIM/Desktop/WIODnet-master/tests/testthat/wide_IO_w2002.rda"))
+    w2002.IO <<- get(load("./wide_IO_w2002.rda"))
     
     mini.long <- getNetLong(w2002.IO)
     
