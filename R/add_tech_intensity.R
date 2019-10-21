@@ -12,8 +12,11 @@
 #'
 #' @import magrittr
 #' 
-addTechIntensity <- function(yearly.raw) {
 
+globalVariables(c("industry.RNr", "IndustryCode", "NewIndustryCode"))
+
+addTechIntensity <- function(yearly.raw) {
+    
     industry.RNr <<- getTechIntensity(yearly.raw)
     
     ## changing the IndustryCode column wihtin the main df
