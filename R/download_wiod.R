@@ -22,7 +22,7 @@ downloadWIOD <- function(download.dir) {
 
     ## check if the downloaded file exist, if not start download
     if (!file.exists(original.file)) {
-        res <- tryCatch(download.file(data_URL,
+        res <- tryCatch(download.file(data.URL,
                                       destfile = original.file,
                                       method = "auto"),
                         error=function(e) 1)
