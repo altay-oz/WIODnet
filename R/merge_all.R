@@ -1,0 +1,78 @@
+#' Merge all to create a panel data for analysis.
+#'
+#' @description Merge all long tables to create a panel data in csv form
+#'     based on WIOD downloaded data.
+#' 
+#' @usage panelWIOD(long.dir = "./wiod_long_data", net.dir = "./wiod_network_data", merge.dir = "./yearly_merged_data")
+#'
+#' @param long.dir directory where the long tables are recorded, Default: "./wiod_long_data"
+#'
+#' @param net.dir directory where the long tables on network
+#'     calculations are recorded, Default: "./wiod_network_data"
+#'
+#' @param merge.dir directory where the long tables are all merged by
+#'     year basis, Default: "./yearly_merged_data"
+#' 
+#' @examples
+#' # Merge all long tables using default values.
+#' \dontrun{panelWIOD()}
+#'
+#' @export
+panelWIOD <- function(long.dir = "./wiod_long_data",
+                      net.dir = "./wiod_network_data",
+                      merge.dir = "./yearly_merged_data/") {
+
+    user.long.dir  <- long.dir
+    user.net.dir <- net.dir
+    user.merge.dir <- merge.dir
+
+    dir.create(user.merge.dir, showWarnings = FALSE)
+
+    ## creating all yearly binded network score and VA value files and
+    ## stored at yearly.net.VA.dir
+    lapply(seq(2000,2014), bind_files,
+           long.dir = user.long.dir, 
+           net.dir = user.net.dir,
+           merge.dir = user.merge.dir)
+        
+    ## obtaining the last file to use in econometric study.
+    ## rbinding all yearly network score VA value files
+    final.wiod.df <- do.call(rbind,
+                             lapply(list.files(path = merge.dir, full.names = TRUE),
+                                    read.csv))
+
+    write.csv(final.wiod.df, "wiod_net_panel_2000_2014.csv", row.names = FALSE) 
+}
+
+globalVariables(c("network.data.dir", "dir.to.write", "yearly.net.dom.int.VA.dir"))
+
+
+bind_files <- function(year,
+                       long.dir = "./wiod_long_data",
+                       net.dir = "./wiod_network_data",
+                       merge.dir = "./yearly_merged_data") {
+    ## bind the network scores, VA values and domestic and internation
+    ## trade based on year and country.industry level.
+    
+    net.score.file <- paste0(net.dir, "/wiod_network_scores_", year, ".rda")
+    dom.int.trade.file <- paste0(long.dir, "/dom_int_trade_long_", year, ".rda")
+    VA.file <- paste0(long.dir, "/VA_long_", year, ".rda")
+        
+    net.score.df <- get(load(net.score.file))
+    dom.int.trade.df <- get(load(dom.int.trade.file))
+    VA.df <- get(load(VA.file))
+    
+    ## from the longest one to the smallest df.  dom.int.trade.df
+    ## comprises final consumption per country, (for example AUS.Z)
+    yearly.net.score.dom.int.VA.df <- net.score.df %>% left_join(dom.int.trade.df) %>%
+        left_join(VA.df)
+
+    yearly.net.score.dom.int.VA.df$year <- year
+    
+    ##yearly.net.score.dom.int.VA.df  <- add_column(yearly.net.score.dom.int.VA.df,
+      ##                                            year = year, .after = "country.ind")
+
+    file.name <- paste0(merge.dir, "net_score_dom_int_VA_", year, ".csv")
+
+    write.csv(yearly.net.score.dom.int.VA.df, file.name, row.names = FALSE)
+}
