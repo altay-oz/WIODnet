@@ -78,3 +78,6 @@ domIntTrade <- function(net.long) {
 
     return(dom.int.weights)
 }
+
+
+globalVariables(c("source.country", "target.country", "weight", "target.industry"))

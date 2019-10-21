@@ -53,3 +53,5 @@ getComplementary  <- function(yearly.complementary, value) {
 
     return(yearly.select.long)    
 }
+
+globalVariables(c("country.ind", "countryind", "ind"))

@@ -36,6 +36,8 @@ downloadWIOD <- function(download.dir) {
     }
 }
 
+globalVariables(c("download.dir"))
+
 checkWIOD <- function(original.file) {
     
     ## obtained from the downloaded file
