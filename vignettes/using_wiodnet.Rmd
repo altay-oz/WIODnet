@@ -1,0 +1,35 @@
+---
+title: "using_wiodnet"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{using_wiodnet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(WIODnet)
+```
+
+There are three functions to call;
+
+* getWIOD() this function download the WIOD data into wiod_original_data
+  and creates long tables for each year in wiod_long_data.
+
+* netWIOD() makes the network calculation on the long tables which are
+  created with getWIOD().
+
+* panelWIOD() merges all long tables and provide a single panel data
+  file in csv.
+
+
+If you are using this package multiple times, better to stick to work
+always on the same directory, else you will download the same +600 MB
+data from the WIOD server. 
