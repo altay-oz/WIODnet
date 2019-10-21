@@ -28,7 +28,7 @@
 getComplementary  <- function(yearly.complementary, value) {
 
     yearly.select <- yearly.complementary %>% filter(IndustryCode == value) %>%
-        select(6:(ncol(yearly.complementary) - 1))
+        select(5:(ncol(yearly.complementary) - 1))
             ##        select(AUS1:ROW61)
 
     yearly.select.long <- tidyr::gather(yearly.select, countryind, factor_key = FALSE)
