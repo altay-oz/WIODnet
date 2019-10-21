@@ -26,9 +26,14 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports:
     dplyr,
+    igraph,
     magrittr,
+    tibble,
     tidyr,
     tools,
     utils
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
