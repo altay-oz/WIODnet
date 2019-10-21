@@ -18,6 +18,8 @@
 #'
 #' @importFrom igraph eigen_centrality
 #'
+#' @importFrom igraph V
+#'
 #' @importFrom tibble rownames_to_column
 #' 
 #' @export
