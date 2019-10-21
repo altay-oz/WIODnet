@@ -30,7 +30,7 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
 
     ## creating all yearly binded network score and VA value files and
     ## stored at yearly.net.VA.dir
-    lapply(seq(2000,2014), bind_files,
+    lapply(seq(2000,2014), bindFiles,
            long.dir = user.long.dir, 
            net.dir = user.net.dir,
            merge.dir = user.merge.dir)
@@ -47,7 +47,7 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
 globalVariables(c("network.data.dir", "dir.to.write", "yearly.net.dom.int.VA.dir"))
 
 
-bind_files <- function(year,
+bindFiles <- function(year,
                        long.dir = "./wiod_long_data",
                        net.dir = "./wiod_network_data",
                        merge.dir = "./yearly_merged_data") {
