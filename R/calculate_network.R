@@ -76,10 +76,13 @@ netCalcWrite  <- function(wiod.long.file.name) {
 #'     calculations are done.
 #' 
 netCalc <- function(wiod.net.df) {
-    
+
     ## removing 0.05 million $ connections.
     yearly.wiod <- wiod.net.df %>% filter(weight > 0.05)
 
+    ## ungroup
+    yearly.wiod <- ungroup(yearly.wiod)
+    
     wiod.nodes.t <- yearly.wiod %>% select(target) %>% unique %>% transmute(country.ind=target)
     wiod.nodes.f <- yearly.wiod %>% select(source) %>% unique %>% transmute(country.ind=source)
     wiod.nodes <- rbind(wiod.nodes.t, wiod.nodes.f) %>% unique
