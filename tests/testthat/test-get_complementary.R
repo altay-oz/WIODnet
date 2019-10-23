@@ -7,7 +7,7 @@ test_that("complementary matrix", {
     expadj.df <- getComplementary(w2002.comp, "EXP_adj")
 
     
-    expect_equal(dim(va.df), c(84, 2))
-    expect_equal(dim(expadj.df), c(84, 2))
+    expect_equal(dim(va.df), c(85, 2))
+    expect_equal(dim(expadj.df), c(85, 2))
     
 })
