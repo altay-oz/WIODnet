@@ -41,7 +41,7 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
                              lapply(list.files(path = merge.dir, full.names = TRUE),
                                     read.csv))
 
-    write.csv(final.wiod.df, "wiod_net_panel_2000_2014.csv", row.names = FALSE) 
+    write.csv(final.wiod.df, "wiod_manuf_net_panel_2000_2014.csv", row.names = FALSE) 
 }
 
 globalVariables(c("network.data.dir", "dir.to.write", "yearly.net.dom.int.VA.dir"))
