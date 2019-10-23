@@ -29,6 +29,8 @@ There are three functions to call;
 * panelWIOD() merges all long tables and provide a single panel data
   file in csv.
 
+* getCountryWIOD() use WIOD data to provide a panel data consisting of
+  countries.
 
 If you are using this package multiple times, better to stick to work
 always on the same directory, else you will download the same +600 MB
