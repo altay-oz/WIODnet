@@ -33,7 +33,8 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
     lapply(seq(2000,2014), bindFiles,
            long.dir = user.long.dir, 
            net.dir = user.net.dir,
-           merge.dir = user.merge.dir)
+           merge.dir = user.merge.dir,
+           ctry = 0)
         
     ## obtaining the last file to use in econometric study.
     ## rbinding all yearly network score VA value files
@@ -48,16 +49,27 @@ globalVariables(c("network.data.dir", "dir.to.write", "yearly.net.dom.int.VA.dir
 
 
 bindFiles <- function(year,
-                       long.dir = "./wiod_long_data",
-                       net.dir = "./wiod_network_data",
-                       merge.dir = "./yearly_merged_data") {
+                      long.dir = "./wiod_long_data",
+                      net.dir = "./wiod_network_data",
+                      merge.dir = "./yearly_merged_data",
+                      ctry = 0) {
     ## bind the network scores, VA values and domestic and internation
     ## trade based on year and country.industry level.
+
+    if (ctry == 0) {
+        net.score.file <- paste0(net.dir, "/wiod_network_scores_", year, ".rda")
+        dom.int.trade.file <- paste0(long.dir, "/dom_int_trade_long_", year, ".rda")
+        VA.file <- paste0(long.dir, "/VA_long_", year, ".rda")
+
+        file.name <- paste0(merge.dir, "net_score_dom_int_VA_", year, ".csv")
+    } else if (ctry == 1) {
+        net.score.file <- paste0(net.dir, "/wiod_ctry_network_scores_", year, ".rda")
+        dom.int.trade.file <- paste0(long.dir, "/dom_int_ctry_long_", year, ".rda")
+        VA.file <- paste0(long.dir, "/VA_ctry_long_", year, ".rda")
+
+        file.name <- paste0(merge.dir, "/net_score_dom_int_VA_", year, ".csv")
+    }
     
-    net.score.file <- paste0(net.dir, "/wiod_network_scores_", year, ".rda")
-    dom.int.trade.file <- paste0(long.dir, "/dom_int_trade_long_", year, ".rda")
-    VA.file <- paste0(long.dir, "/VA_long_", year, ".rda")
-        
     net.score.df <- get(load(net.score.file))
     dom.int.trade.df <- get(load(dom.int.trade.file))
     VA.df <- get(load(VA.file))
@@ -71,8 +83,6 @@ bindFiles <- function(year,
     
     ##yearly.net.score.dom.int.VA.df  <- add_column(yearly.net.score.dom.int.VA.df,
       ##                                            year = year, .after = "country.ind")
-
-    file.name <- paste0(merge.dir, "net_score_dom_int_VA_", year, ".csv")
 
     write.csv(yearly.net.score.dom.int.VA.df, file.name, row.names = FALSE)
 }

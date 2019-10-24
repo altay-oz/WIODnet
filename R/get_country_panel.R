@@ -48,9 +48,11 @@ getCountryWIOD <- function(long.dir =  "./wiod_long_data",
            network.data.dir = "./wiod_ctry_network_data", ctry = 1)
 
     ## binding all files yearly.
-    lapply(seq(2000, 2014), bindCtryFiles, long.dir = "./wiod_ctry_long_data",
-                       net.dir = "./wiod_ctry_network_data",
-                       merge.dir = ctry.merge.dir)
+    lapply(seq(2000, 2014), bindFiles,
+           long.dir = "./wiod_ctry_long_data",
+           net.dir = "./wiod_ctry_network_data",
+           merge.dir = ctry.merge.dir,
+           ctry = 1)
 
     ## obtaining the last file to use in econometric study.
     ## rbinding all yearly network score VA values etc.
