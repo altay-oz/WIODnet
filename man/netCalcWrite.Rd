@@ -4,11 +4,15 @@
 \alias{netCalcWrite}
 \title{Writing the calculated network file on disk.}
 \usage{
-netCalcWrite(wiod.long.file.name)
+netCalcWrite(wiod.long.file.name, network.data.dir, ctry)
 }
 \arguments{
 \item{wiod.long.file.name}{rda file containing the long network table
 to read.}
+
+\item{network.data.dir}{directory where all network calculation files are stored.}
+
+\item{ctry}{control variable if the analysis is country based, 0 or 1.}
 }
 \description{
 Calculate network scores for all industries for each

@@ -7,15 +7,18 @@
 getCountryWIOD(country.long.dir = "./wiod_long_data")
 }
 \arguments{
+\item{long.dir}{directory where the long tables are already obtained, Default: "./wiod_long_data"}
+
 \item{country.long.dir}{directory where the long tables are recorded, Default: "./wiod_country_long_data"}
 }
 \description{
 Create country based long tables and merge them them to
     create a panel data in csv form based on downloaded and prapared
-    WIOD data.
+    WIOD data. If there is no WIOD data downloaded, this function
+    will donwload it, unzip it and prepare long tables.
 }
 \examples{
-# Merge all long tables using default values.
+# Create country based panel data.
 \dontrun{getCountryWIOD()}
 
 }

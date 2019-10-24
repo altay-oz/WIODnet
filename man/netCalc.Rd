@@ -4,7 +4,7 @@
 \alias{netCalc}
 \title{Network calculation for each year}
 \usage{
-netCalc(wiod.net.df)
+netCalc(wiod.net.df, ctry)
 }
 \arguments{
 \item{wiod.net.df}{the long table data frame on which all network
