@@ -32,6 +32,7 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
 
     ## if there is no network directory then netWIOD did not run yet.
     if (!file.exists(net.dir)) {
+        message("There is no network directory, running network calculations.")
         netWIOD(long.dir)
     }
     
