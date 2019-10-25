@@ -4,7 +4,7 @@
 \alias{getNetLong}
 \title{Generate yearly long tables for network analysis.}
 \usage{
-getNetLong(yearly.IO)
+getNetLong(yearly.IO, industry.RNr)
 }
 \arguments{
 \item{yearly.IO}{network matrix among industries obtained from the raw data.}

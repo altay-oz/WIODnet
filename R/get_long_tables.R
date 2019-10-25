@@ -7,14 +7,17 @@
 #' 
 #' @import dplyr
 #'
-getLongTables <- function(file.name) {
+getLongTables <- function(file.name, dir.to.write) {
 
     yearly.raw <- get(load(file.name))
     
     year <- unique(yearly.raw$Year)
 
-    ## using the raw file to change it according to industry.RNr
-    yearly.raw <- addTechIntensity(yearly.raw)
+    ## using the raw file to change it according to industry.RNr and
+    ## obtaining industry.RNr
+    yearly.raw.ind.RNr <- addTechIntensity(yearly.raw)
+    yearly.raw <- yearly.raw.ind.RNr[[1]]
+    industry.RNr <- yearly.raw.ind.RNr[[2]]
     
     ## obtaining the wide df for network transformation and other data
     two.df <- divideRawData(yearly.raw)
@@ -22,7 +25,7 @@ getLongTables <- function(file.name) {
     ## the wide df to be used to obtain network long df
     yearly.IO <- two.df[[1]]
     ## getting the long df
-    net.long <- getNetLong(yearly.IO)
+    net.long <- getNetLong(yearly.IO, industry.RNr)
 
     ## other info grabbed from the raw data
     yearly.complementary <- two.df[[2]]
@@ -36,7 +39,7 @@ getLongTables <- function(file.name) {
     ##         VA                           Value added at basic prices     TOT
 
     ## getting only the VA
-    VA.df <- getComplementary(yearly.complementary, "VA")
+    VA.df <- getComplementary(yearly.complementary, industry.RNr, "VA")
 
     ## and the other info | uncomment them if needed and don't forget to
     ## bind them
@@ -56,16 +59,16 @@ getLongTables <- function(file.name) {
     file.name.dom.int <- paste0(paste("dom_int_trade_long", year, sep = "_"), ".rda")
     
     ## writing all dataframes
-    writeFile(net.long, file.name.net)
-    writeFile(VA.df, file.name.VA)
-    writeFile(dom.int.weights, file.name.dom.int)
+    writeFile(net.long, file.name.net, dir.to.write)
+    writeFile(VA.df, file.name.VA, dir.to.write)
+    writeFile(dom.int.weights, file.name.dom.int, dir.to.write)
     
     ## just printing where we are.
     message(paste("Year finished:", year))
 
 }
 
-writeFile <- function(df, file.name) {
+writeFile <- function(df, file.name, dir.to.write) {
     dir.file <- paste(dir.to.write, file.name, sep="/")
     save(df, file = dir.file)
 }

@@ -19,7 +19,8 @@
 #' @import dplyr
 #'
 #' @export
-getWIOD <- function(download.dir =  "./wiod_original_data") {
+getWIOD <- function(download.dir =  "./wiod_original_data",
+                    dir.to.write =  "./wiod_long_data") {
 
     downloadWIOD(download.dir)
 
@@ -31,6 +32,6 @@ getWIOD <- function(download.dir =  "./wiod_original_data") {
     
     ## call all functions above with this line, creating a final long file
     ## wiod_long_YEAR.csv to perform network analysis.
-    lapply(wiod.files, getLongTables)
+    lapply(wiod.files, getLongTables, dir.to.write)
 
 }

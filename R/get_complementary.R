@@ -25,7 +25,7 @@
 #' 
 #' @importFrom magrittr extract
 #'
-getComplementary  <- function(yearly.complementary, value) {
+getComplementary  <- function(yearly.complementary, industry.RNr, value) {
 
     yearly.select <- yearly.complementary %>% filter(IndustryCode == value) %>%
         select(5:(ncol(yearly.complementary) - 1))

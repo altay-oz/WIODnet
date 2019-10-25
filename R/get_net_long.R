@@ -18,7 +18,7 @@
 #'
 #' @importFrom magrittr extract
 #'
-getNetLong <- function(yearly.IO) {
+getNetLong <- function(yearly.IO, industry.RNr) {
 
     yearly.IO %<>% select(-c("Year", "IndustryDescription", "RNr", "TOT"))
 

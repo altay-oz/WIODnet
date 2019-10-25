@@ -4,7 +4,7 @@
 \alias{getLongTables}
 \title{Generate long tables from the original WIOD zip file.}
 \usage{
-getLongTables(file.name)
+getLongTables(file.name, dir.to.write)
 }
 \arguments{
 \item{file.name}{yearly file name obtained from the download directory}

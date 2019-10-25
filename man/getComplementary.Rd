@@ -4,7 +4,7 @@
 \alias{getComplementary}
 \title{Generate a long table for VA, TXSP etc and other complementary values.}
 \usage{
-getComplementary(yearly.complementary, value)
+getComplementary(yearly.complementary, industry.RNr, value)
 }
 \arguments{
 \item{yearly.complementary}{the last portion of the yearly WIOD data
