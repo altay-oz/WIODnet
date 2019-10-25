@@ -4,10 +4,12 @@
 \alias{panelWIOD}
 \title{Merge all to create a panel data for analysis.}
 \usage{
-panelWIOD(long.dir = "./wiod_long_data", net.dir = "./wiod_network_data", merge.dir = "./yearly_merged_data")
+panelWIOD(long.dir = "./wiod_long_data", net.dir =
+    "./wiod_network_data", merge.dir = "./yearly_merged_data")
 }
 \arguments{
-\item{long.dir}{directory where the long tables are recorded, Default: "./wiod_long_data"}
+\item{long.dir}{directory where the long tables are recorded,
+Default: "./wiod_long_data"}
 
 \item{net.dir}{directory where the long tables on network
 calculations are recorded, Default: "./wiod_network_data"}

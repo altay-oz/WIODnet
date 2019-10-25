@@ -26,6 +26,13 @@
 netWIOD <- function(file.dir =  "./wiod_long_data") {
     ## creating the list of files
     wiod.long.file.name <- list.files(file.dir, pattern="^wiod_long", full.names = TRUE)
+
+    if (length(wiod.long.file.name == 0)) {
+        message("Downloading WIOD zip file and start network calculation.")
+        getWIOD()
+        message("Run panelWIOD() to obtain the csv panel data file.")
+    }
+
     ## creating where all yearly network analysis are stored
     network.data.dir <- "./wiod_network_data"
     dir.create(network.data.dir, showWarnings = FALSE)
@@ -36,8 +43,6 @@ netWIOD <- function(file.dir =  "./wiod_long_data") {
 }
 
 
-globalVariables(c("network.data.dir", "weight", "target", "V"))
-
 #' Writing the calculated network file on disk.
 #'
 #' @description Calculate network scores for all industries for each
@@ -46,9 +51,11 @@ globalVariables(c("network.data.dir", "weight", "target", "V"))
 #' @param wiod.long.file.name rda file containing the long network table
 #'     to read.
 #'
-#' @param network.data.dir directory where all network calculation files are stored. 
+#' @param network.data.dir directory where all network calculation files
+#'     are stored.
 #'
-#' @param ctry control variable if the analysis is country based, 0 or 1.
+#' @param ctry control variable if the analysis is country based, 0 or
+#'     1.
 #' 
 netCalcWrite  <- function(wiod.long.file.name, network.data.dir, ctry) {
 
@@ -86,6 +93,9 @@ netCalcWrite  <- function(wiod.long.file.name, network.data.dir, ctry) {
 #'
 #' @param wiod.net.df the long table data frame on which all network
 #'     calculations are done.
+#'
+#' @param ctry control variable if the analysis is country based, 0 or
+#'     1.
 #' 
 netCalc <- function(wiod.net.df, ctry) {
 

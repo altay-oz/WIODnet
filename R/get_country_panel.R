@@ -5,12 +5,19 @@
 #'     WIOD data. If there is no WIOD data downloaded, this function
 #'     will donwload it, unzip it and prepare long tables.
 #' 
-#' @usage getCountryWIOD(country.long.dir = "./wiod_long_data")
+#' @usage getCountryWIOD(long.dir = "./wiod_long_data",
+#'     country.long.dir = "./wiod_ctry_long_data", ctry.merge.dir =
+#'     "./yearly_ctry_merged_data")
 #'
-#' @param long.dir directory where the long tables are already obtained, Default: "./wiod_long_data"
+#' @param long.dir directory where the long tables are already obtained,
+#'     Default: "./wiod_long_data"
 #' 
-#' @param country.long.dir directory where the long tables are recorded, Default: "./wiod_country_long_data"
+#' @param country.long.dir directory where the long tables are recorded,
+#'     Default: "./wiod_country_long_data"
 #'
+#' @param ctry.merge.dir directory where all tables are merged for each
+#'     year, Default: "./wiod_country_long_data"
+#' 
 #' @examples
 #' # Create country based panel data.
 #' \dontrun{getCountryWIOD()}
@@ -66,7 +73,8 @@ getCountryWIOD <- function(long.dir =  "./wiod_long_data",
 }
 
 
-getCtryLong <- function(year, long.dir = "./wiod_long_data",
+getCtryLong <- function(year,
+                        long.dir = "./wiod_long_data",
                         country.long.dir = "./wiod_ctry_long_data") {
 
     ## long.dir where all long data with country.ind is located
@@ -103,35 +111,4 @@ getCtryLong <- function(year, long.dir = "./wiod_long_data",
 
     message(paste("Country based looooooong tables/files for the year", year,
                   "are ready."))
-}
-
-bindCtryFiles <- function(year,
-                       long.dir = "./wiod_ctry_long_data",
-                       net.dir = "./wiod_ctry_network_data",
-                       merge.dir = "./yearly_ctry_merged_data") {
-    ## bind the network scores, VA values and domestic and internation
-    ## trade based on year and country.industry level.
-
-    net.score.file <- paste0(net.dir, "/wiod_ctry_network_scores_", year, ".rda")
-    dom.int.trade.file <- paste0(long.dir, "/dom_int_ctry_long_", year, ".rda")
-    VA.file <- paste0(long.dir, "/VA_ctry_long_", year, ".rda")
-
-    net.score.df <- get(load(net.score.file))
-    dom.int.trade.df <- get(load(dom.int.trade.file))
-    VA.df <- get(load(VA.file))
-    
-    ## from the longest one to the smallest df.  dom.int.trade.df
-    ## comprises final consumption per country, (for example AUS.Z)
-    yearly.net.score.dom.int.VA.df <- net.score.df %>% left_join(dom.int.trade.df) %>%
-        left_join(VA.df)
-
-    yearly.net.score.dom.int.VA.df$year <- year
-    
-    ##yearly.net.score.dom.int.VA.df  <- add_column(yearly.net.score.dom.int.VA.df,
-      ##                                            year = year, .after = "country.ind")
-
-    file.name <- paste0(merge.dir, "/net_score_dom_int_VA_", year, ".csv")
-
-    write.csv(yearly.net.score.dom.int.VA.df, file.name, row.names = FALSE)
-
 }

@@ -9,8 +9,6 @@
 #'
 #' @import utils
 #'
-#' @importFrom tools md5sum
-#' 
 downloadWIOD <- function(download.dir) {
     data.URL  <-  "http://www.wiod.org/protected3/data16/wiot_ROW/wiot_r_Nov16.zip"
 
@@ -36,8 +34,15 @@ downloadWIOD <- function(download.dir) {
     }
 }
 
-globalVariables(c("download.dir"))
-
+#' Check if the downloaded file is the one downloaded by Altay.
+#'
+#' @description Check the integrity of the zip file with the md5sum
+#'     obtained by Altay. The md5sum is not provided by the WIOD source.
+#'
+#' @param original.file the zip file downloaded.
+#'
+#' @importFrom tools md5sum
+#' 
 checkWIOD <- function(original.file) {
     
     ## obtained from the downloaded file

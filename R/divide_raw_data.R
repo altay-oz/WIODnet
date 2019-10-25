@@ -29,5 +29,3 @@ divideRawData <- function(yearly.raw) {
 
     return(list(yearly.wide.IO, yearly.complementary))
 }
-
-globalVariables(c("RNr"))

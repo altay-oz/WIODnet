@@ -65,8 +65,6 @@ getLongTables <- function(file.name) {
 
 }
 
-globalVariables(c("target.country.ind", "raw.weight", "target.ind"))
-
 writeFile <- function(df, file.name) {
     dir.file <- paste(dir.to.write, file.name, sep="/")
     save(df, file = dir.file)

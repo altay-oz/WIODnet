@@ -3,9 +3,11 @@
 #' @description Merge all long tables to create a panel data in csv form
 #'     based on WIOD downloaded data.
 #' 
-#' @usage panelWIOD(long.dir = "./wiod_long_data", net.dir = "./wiod_network_data", merge.dir = "./yearly_merged_data")
+#' @usage panelWIOD(long.dir = "./wiod_long_data", net.dir =
+#'     "./wiod_network_data", merge.dir = "./yearly_merged_data")
 #'
-#' @param long.dir directory where the long tables are recorded, Default: "./wiod_long_data"
+#' @param long.dir directory where the long tables are recorded,
+#'     Default: "./wiod_long_data"
 #'
 #' @param net.dir directory where the long tables on network
 #'     calculations are recorded, Default: "./wiod_network_data"
@@ -20,7 +22,7 @@
 #' @export
 panelWIOD <- function(long.dir = "./wiod_long_data",
                       net.dir = "./wiod_network_data",
-                      merge.dir = "./yearly_merged_data/") {
+                      merge.dir = "./yearly_merged_data") {
 
     user.long.dir  <- long.dir
     user.net.dir <- net.dir
@@ -28,6 +30,11 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
 
     dir.create(user.merge.dir, showWarnings = FALSE)
 
+    ## if there is no network directory then netWIOD did not run yet.
+    if (!file.exists(net.dir)) {
+        netWIOD(long.dir)
+    }
+    
     ## creating all yearly binded network score and VA value files and
     ## stored at yearly.net.VA.dir
     lapply(seq(2000,2014), bindFiles,
@@ -39,15 +46,29 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
     ## obtaining the last file to use in econometric study.
     ## rbinding all yearly network score VA value files
     final.wiod.df <- do.call(rbind,
-                             lapply(list.files(path = merge.dir, full.names = TRUE),
+                             lapply(list.files(path = user.merge.dir, full.names = TRUE),
                                     read.csv))
 
     write.csv(final.wiod.df, "wiod_manuf_net_panel_2000_2014.csv", row.names = FALSE) 
 }
 
-globalVariables(c("network.data.dir", "dir.to.write", "yearly.net.dom.int.VA.dir"))
-
-
+#' Bind all files to create a yearly panel data.
+#'
+#' @description Merge all long tables to create a panel data in csv form
+#'     for each year.
+#'
+#' @param year between 2000 and 2014, WIOD years.
+#' 
+#' @param long.dir directory where the long tables are recorded, Default: "./wiod_long_data"
+#'
+#' @param net.dir directory where the long tables on network
+#'     calculations are recorded, Default: "./wiod_network_data"
+#'
+#' @param merge.dir directory where the long tables are all merged by
+#'     year basis, Default: "./yearly_merged_data"
+#'
+#' @param ctry control variable if the process is based on countries
+#' 
 bindFiles <- function(year,
                       long.dir = "./wiod_long_data",
                       net.dir = "./wiod_network_data",

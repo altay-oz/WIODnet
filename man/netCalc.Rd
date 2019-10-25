@@ -9,6 +9,9 @@ netCalc(wiod.net.df, ctry)
 \arguments{
 \item{wiod.net.df}{the long table data frame on which all network
 calculations are done.}
+
+\item{ctry}{control variable if the analysis is country based, 0 or
+1.}
 }
 \description{
 Calculate network scores of long files obtained from

@@ -13,11 +13,9 @@
 #' @import magrittr
 #' 
 
-globalVariables(c("industry.RNr", "IndustryCode", "NewIndustryCode"))
-
 addTechIntensity <- function(yearly.raw) {
     
-    industry.RNr <<- getTechIntensity(yearly.raw)
+    industry.RNr <- getTechIntensity(yearly.raw)
     
     ## changing the IndustryCode column wihtin the main df
     yearly.raw %<>% left_join(industry.RNr, yearly.raw, by = c("RNr"))
