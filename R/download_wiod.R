@@ -26,11 +26,11 @@ downloadWIOD <- function(download.dir) {
                         error=function(e) 1)
 
         ## check the integrity of the downloaded file
-        checkWIOD(original.file)
+        checkWIOD(original.file, download.dir)
         
     } else {
         ## check the integrity of the allready downloaded file
-        checkWIOD(original.file)
+        checkWIOD(original.file, download.dir)
     }
 }
 
@@ -43,7 +43,7 @@ downloadWIOD <- function(download.dir) {
 #'
 #' @importFrom tools md5sum
 #' 
-checkWIOD <- function(original.file) {
+checkWIOD <- function(original.file, download.dir) {
     
     ## obtained from the downloaded file
     md5sum.wiod <- "8d313ac0c9f113e16ac66e8c7fe5bf51"
