@@ -64,7 +64,7 @@ getLongTables <- function(file.name, dir.to.write) {
     writeFile(dom.int.weights, file.name.dom.int, dir.to.write)
     
     ## just printing where we are.
-    message(paste("Year finished:", year))
+    message(paste("Creating long tables. Year finished:", year))
 
 }
 

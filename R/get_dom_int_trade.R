@@ -73,8 +73,10 @@ domIntTrade <- function(net.long) {
     names(int.Z)[1] <- "country.ind"
 
     ## merge all
-    dom.int.weights <- all.nodes %>% left_join(dom.out) %>% left_join(int.out) %>%
-        left_join(dom.in) %>% left_join(int.in) %>% left_join(dom.Z) %>% left_join(int.Z)
+    dom.int.weights <- all.nodes %>% left_join(dom.out, by = "country.ind") %>%
+        left_join(int.out, by = "country.ind") %>% left_join(dom.in, by = "country.ind") %>%
+        left_join(int.in, by = "country.ind") %>% left_join(dom.Z, by = "country.ind") %>%
+        left_join(int.Z, by = "country.ind")
 
     return(dom.int.weights)
 }

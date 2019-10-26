@@ -23,5 +23,5 @@ addTechIntensity <- function(yearly.raw) {
     ## cleaning the data frame
     yearly.raw %<>% select(-IndustryCode) %>% rename(IndustryCode = NewIndustryCode)
 
-    return(yearly.raw)
+    return(list(yearly.raw, industry.RNr))
 }

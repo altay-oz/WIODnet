@@ -68,8 +68,7 @@ getCountryWIOD <- function(long.dir =  "./wiod_long_data",
                                     read.csv))
 
     write.csv(final.ctry.wiod.df, "wiod_ctry_net_panel_2000_2014.csv", row.names = FALSE)
-
-    message("Country based panel data is created.")
+    message("Country based panel data wiod_ctry_net_panel_2000_2014.csv is ready")
 }
 
 

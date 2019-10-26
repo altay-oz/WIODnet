@@ -25,12 +25,18 @@
 #' @export
 netWIOD <- function(file.dir =  "./wiod_long_data") {
     ## creating the list of files
-    wiod.long.file.name <- list.files(file.dir, pattern="^wiod_long", full.names = TRUE)
-
-    if (length(wiod.long.file.name == 0)) {
-        message("Downloading WIOD zip file and start network calculation.")
+    wiod.long.file.name <- list.files(file.dir, pattern="^wiod_long",
+                                      full.names = TRUE)
+    
+    if (length(wiod.long.file.name) == 0) {
+        message("Long files are not found.")
+        message("Once long files are made network calculations will start.")
         getWIOD()
-        message("Run panelWIOD() to obtain the csv panel data file.")
+        ## obtaining the new and non-empty list of files to be used in
+        ## network calculations
+        wiod.long.file.name <- list.files(file.dir,
+                                          pattern="^wiod_long",
+                                          full.names = TRUE)
     }
 
     ## creating where all yearly network analysis are stored
@@ -40,6 +46,8 @@ netWIOD <- function(file.dir =  "./wiod_long_data") {
     ## call all functions above with this line, creating a final long file
     ## wiod_long_YEAR.csv to perform network analysis.
     lapply(wiod.long.file.name, netCalcWrite, network.data.dir = network.data.dir, ctry = 0)
+
+    message("Run panelWIOD() to obtain the csv panel data file.")
 }
 
 

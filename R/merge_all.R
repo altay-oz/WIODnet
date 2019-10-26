@@ -50,7 +50,8 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
                              lapply(list.files(path = user.merge.dir, full.names = TRUE),
                                     read.csv))
 
-    write.csv(final.wiod.df, "wiod_manuf_net_panel_2000_2014.csv", row.names = FALSE) 
+    write.csv(final.wiod.df, "wiod_manuf_net_panel_2000_2014.csv", row.names = FALSE)
+    message("The file wiod_manuf_net_panel_2000_2014.csv is ready")
 }
 
 #' Bind all files to create a yearly panel data.
@@ -83,7 +84,7 @@ bindFiles <- function(year,
         dom.int.trade.file <- paste0(long.dir, "/dom_int_trade_long_", year, ".rda")
         VA.file <- paste0(long.dir, "/VA_long_", year, ".rda")
 
-        file.name <- paste0(merge.dir, "net_score_dom_int_VA_", year, ".csv")
+        file.name <- paste0(merge.dir, "/net_score_dom_int_VA_", year, ".csv")
     } else if (ctry == 1) {
         net.score.file <- paste0(net.dir, "/wiod_ctry_network_scores_", year, ".rda")
         dom.int.trade.file <- paste0(long.dir, "/dom_int_ctry_long_", year, ".rda")
@@ -98,9 +99,17 @@ bindFiles <- function(year,
     
     ## from the longest one to the smallest df.  dom.int.trade.df
     ## comprises final consumption per country, (for example AUS.Z)
-    yearly.net.score.dom.int.VA.df <- net.score.df %>% left_join(dom.int.trade.df) %>%
-        left_join(VA.df)
 
+    if (ctry == 0) {
+        yearly.net.score.dom.int.VA.df <- net.score.df %>%
+            left_join(dom.int.trade.df, by = "country.ind") %>%
+            left_join(VA.df, by = "country.ind")
+    } else if (ctry == 1) {
+        yearly.net.score.dom.int.VA.df <- net.score.df %>%
+            left_join(dom.int.trade.df, by = "country") %>%
+            left_join(VA.df, by = "country")
+    }        
+    
     yearly.net.score.dom.int.VA.df$year <- year
     
     ##yearly.net.score.dom.int.VA.df  <- add_column(yearly.net.score.dom.int.VA.df,
