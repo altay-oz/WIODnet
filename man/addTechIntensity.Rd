@@ -4,10 +4,12 @@
 \alias{addTechIntensity}
 \title{Join the tech intensity data frame to the yearly WIOD}
 \usage{
-addTechIntensity(yearly.raw)
+addTechIntensity(yearly.raw, isic)
 }
 \arguments{
 \item{yearly.raw}{yearly raw data from the downloaded zip such as WIOT2011_October16_ROW.RData}
+
+\item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \value{
 data frame

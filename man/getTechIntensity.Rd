@@ -4,10 +4,12 @@
 \alias{getTechIntensity}
 \title{Create a data frame for technology intensity.}
 \usage{
-getTechIntensity(yearly.raw)
+getTechIntensity(yearly.raw, isic)
 }
 \arguments{
 \item{yearly.raw}{yearly raw data from the downloaded zip such as WIOT2011_October16_ROW.RData}
+
+\item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \description{
 Create a data frame of technology intensity as defined

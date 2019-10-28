@@ -11,6 +11,9 @@
 #' @param yearly.complementary the last portion of the yearly WIOD data
 #'     containing complementary values.
 #'
+#' @param industry.RNr the dataframe containing industry and its RNr
+#'     code to be used in column name
+#' 
 #' @param value one of the six different values; VA, II_fob, TXSP, EXP_adj, PURR, RURNR.
 #' 
 #' @return data frame

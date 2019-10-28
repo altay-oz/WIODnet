@@ -23,7 +23,7 @@
 #' @importFrom tibble rownames_to_column
 #' 
 #' @export
-netWIOD <- function(file.dir =  "./wiod_long_data") {
+netWIOD <- function(file.dir =  "./wiod_long_data", isic) {
     ## creating the list of files
     wiod.long.file.name <- list.files(file.dir, pattern="^wiod_long",
                                       full.names = TRUE)
@@ -31,7 +31,7 @@ netWIOD <- function(file.dir =  "./wiod_long_data") {
     if (length(wiod.long.file.name) == 0) {
         message("Long files are not found.")
         message("Once long files are made network calculations will start.")
-        getWIOD()
+        getWIOD(isic)
         ## obtaining the new and non-empty list of files to be used in
         ## network calculations
         wiod.long.file.name <- list.files(file.dir,
@@ -49,7 +49,6 @@ netWIOD <- function(file.dir =  "./wiod_long_data") {
 
     message("Run panelWIOD() to obtain the csv panel data file.")
 }
-
 
 #' Writing the calculated network file on disk.
 #'
@@ -74,6 +73,13 @@ netCalcWrite  <- function(wiod.long.file.name, network.data.dir, ctry) {
     }
     
     yearly.long.wiod <- get(load(wiod.long.file.name))
+
+    ## remove the final market Z from the network calculation
+    yearly.long.wiod %<>% separate(target, c("target.country",
+                                            "target.industry"), sep = "\\.") %>% 
+        filter(target.industry != "Z") %>% unite("target",
+                                                 "target.country",
+                                                 "target.industry", sep = ".")
     
     nc <- netCalc(yearly.long.wiod, ctry)
 

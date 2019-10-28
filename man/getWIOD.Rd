@@ -9,6 +9,10 @@ getWIOD(download.dir = "./wiod_original_data")
 \arguments{
 \item{download.dir}{The directory into which the original WIOD zip
 file is downloaded and unziped, Default: "./wiod_original_data"}
+
+\item{dir.to.write}{directory to record all long files.}
+
+\item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \description{
 Call various functions to download, unzip, divide and

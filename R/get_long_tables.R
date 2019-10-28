@@ -4,10 +4,14 @@
 #'     written on to the disk.
 #'
 #' @param file.name yearly file name obtained from the download directory
+#'
+#' @param dir.to.write directory where all long files are recorded
+#'
+#' @param isic parameter to be given for the aggregation of the industries.
 #' 
 #' @import dplyr
 #'
-getLongTables <- function(file.name, dir.to.write) {
+getLongTables <- function(file.name, dir.to.write, isic) {
 
     yearly.raw <- get(load(file.name))
     
@@ -15,7 +19,7 @@ getLongTables <- function(file.name, dir.to.write) {
 
     ## using the raw file to change it according to industry.RNr and
     ## obtaining industry.RNr
-    yearly.raw.ind.RNr <- addTechIntensity(yearly.raw)
+    yearly.raw.ind.RNr <- addTechIntensity(yearly.raw, isic)
     yearly.raw <- yearly.raw.ind.RNr[[1]]
     industry.RNr <- yearly.raw.ind.RNr[[2]]
     

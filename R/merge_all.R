@@ -22,7 +22,8 @@
 #' @export
 panelWIOD <- function(long.dir = "./wiod_long_data",
                       net.dir = "./wiod_network_data",
-                      merge.dir = "./yearly_merged_data") {
+                      merge.dir = "./yearly_merged_data",
+                      isic) {
 
     user.long.dir  <- long.dir
     user.net.dir <- net.dir
@@ -33,7 +34,7 @@ panelWIOD <- function(long.dir = "./wiod_long_data",
     ## if there is no network directory then netWIOD did not run yet.
     if (!file.exists(net.dir)) {
         message("There is no network directory, running network calculations.")
-        netWIOD(long.dir)
+        netWIOD(long.dir, isic)
     }
     
     ## creating all yearly binded network score and VA value files and

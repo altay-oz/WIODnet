@@ -4,10 +4,14 @@
 \alias{getLongTables}
 \title{Generate long tables from the original WIOD zip file.}
 \usage{
-getLongTables(file.name, dir.to.write)
+getLongTables(file.name, dir.to.write, isic)
 }
 \arguments{
 \item{file.name}{yearly file name obtained from the download directory}
+
+\item{dir.to.write}{directory where all long files are recorded}
+
+\item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \description{
 Call various functions to prepare long tables which are

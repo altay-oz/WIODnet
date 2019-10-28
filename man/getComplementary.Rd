@@ -10,6 +10,9 @@ getComplementary(yearly.complementary, industry.RNr, value)
 \item{yearly.complementary}{the last portion of the yearly WIOD data
 containing complementary values.}
 
+\item{industry.RNr}{the dataframe containing industry and its RNr
+code to be used in column name}
+
 \item{value}{one of the six different values; VA, II_fob, TXSP, EXP_adj, PURR, RURNR.}
 }
 \value{
