@@ -4,11 +4,10 @@
 \alias{netWIOD}
 \title{Calculate network scores for all industries}
 \usage{
-netWIOD(file.dir = "./wiod_long_data")
+netWIOD(isic)
 }
 \arguments{
-\item{file.dir}{The directory into which all long tables obtained from
-WIOD are written, Default: "./wiod_long_data"}
+\item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \description{
 Calculate network scores for all industries for each

@@ -4,39 +4,38 @@
 #'     create yearly long tables from the original WIOD file. All long
 #'     tables are also saved.
 #'
-#' @usage getWIOD(download.dir = "./wiod_original_data")
-#'
-#' @param download.dir The directory into which the original WIOD zip
-#'     file is downloaded and unziped, Default: "./wiod_original_data"
-#'
-#' @param  dir.to.write directory to record all long files.
+#' @usage getWIOD(isic)
 #'
 #' @param isic parameter to be given for the aggregation of the industries.
 #' 
 #' @examples
 #' # Downloading the zip file to the default directory (wiod_original_data)
-#' \dontrun{getWIOD(download.dir =  "./wiod_original_data")}
-#' 
-#' # Downloading the original zip file to the /user/defined/directory.
-#' \dontrun{getWIOD("/user/defined/directory")}
+#' \dontrun{getWIOD(2)}
 #'
 #' @import dplyr
 #'
 #' @export
-getWIOD <- function(download.dir =  "./wiod_original_data",
-                    dir.to.write =  "./wiod_long_data",
-                    isic) {
+#' 
+getWIOD <- function(isic) {
 
+    ## the directory where the original wiod zip data is downloaded.
+    download.dir <- "./wiod_original_data"
+    
+    ## obtaning the name and creating the directory in which all long
+    ## files are put
+    dir.list <- setDir(isic)
+
+    isic.long.dir <- dir.list[[1]]
+
+    dir.create(isic.long.dir, showWarnings = FALSE)
+    
+    ## downloading the WIOD data. 
     downloadWIOD(download.dir)
 
     ## creating the list of files
     wiod.files <- list.files(download.dir, pattern="*.RData", full.names = TRUE)
-
-    dir.to.write <- "./wiod_long_data"
-    dir.create(dir.to.write, showWarnings = FALSE)
     
-    ## call all functions above with this line, creating a final long file
-    ## wiod_long_YEAR.csv to perform network analysis.
-    lapply(wiod.files, getLongTables, dir.to.write, isic)
+    ## creating different long tables to be used in network analysis.
+    lapply(wiod.files, getLongTables, isic.long.dir, isic)
 
 }

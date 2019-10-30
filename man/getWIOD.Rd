@@ -4,14 +4,9 @@
 \alias{getWIOD}
 \title{Call all functions to download and create yearly long tables.}
 \usage{
-getWIOD(download.dir = "./wiod_original_data")
+getWIOD(isic)
 }
 \arguments{
-\item{download.dir}{The directory into which the original WIOD zip
-file is downloaded and unziped, Default: "./wiod_original_data"}
-
-\item{dir.to.write}{directory to record all long files.}
-
 \item{isic}{parameter to be given for the aggregation of the industries.}
 }
 \description{
@@ -21,9 +16,6 @@ Call various functions to download, unzip, divide and
 }
 \examples{
 # Downloading the zip file to the default directory (wiod_original_data)
-\dontrun{getWIOD(download.dir =  "./wiod_original_data")}
-
-# Downloading the original zip file to the /user/defined/directory.
-\dontrun{getWIOD("/user/defined/directory")}
+\dontrun{getWIOD(2)}
 
 }

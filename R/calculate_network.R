@@ -3,11 +3,10 @@
 #' @description Calculate network scores for all industries for each
 #'     year from the long tables created with getWIOD function.
 #'
-#' @usage netWIOD(file.dir = "./wiod_long_data")
+#' @usage netWIOD(isic)
 #'
-#' @param file.dir The directory into which all long tables obtained from
-#'     WIOD are written, Default: "./wiod_long_data"
-#'
+#' @param isic parameter to be given for the aggregation of the industries.
+#' 
 #' @importFrom igraph graph.data.frame
 #'
 #' @importFrom igraph strength
@@ -23,9 +22,18 @@
 #' @importFrom tibble rownames_to_column
 #' 
 #' @export
-netWIOD <- function(file.dir =  "./wiod_long_data", isic) {
+#' 
+netWIOD <- function(isic) {
+
+    dir.list <- setDir(isic)
+
+    isic.long.dir <- dir.list[[1]]
+    isic.net.dir <- dir.list[[2]]
+    isic.merge.dir <- dir.list[[3]]
+    final.file.name <- dir.list[[4]]
+
     ## creating the list of files
-    wiod.long.file.name <- list.files(file.dir, pattern="^wiod_long",
+    wiod.long.file.name <- list.files(isic.long.dir, pattern="^wiod_long",
                                       full.names = TRUE)
     
     if (length(wiod.long.file.name) == 0) {
@@ -34,20 +42,19 @@ netWIOD <- function(file.dir =  "./wiod_long_data", isic) {
         getWIOD(isic)
         ## obtaining the new and non-empty list of files to be used in
         ## network calculations
-        wiod.long.file.name <- list.files(file.dir,
+        wiod.long.file.name <- list.files(isic.long.dir,
                                           pattern="^wiod_long",
                                           full.names = TRUE)
     }
 
     ## creating where all yearly network analysis are stored
-    network.data.dir <- "./wiod_network_data"
-    dir.create(network.data.dir, showWarnings = FALSE)
+    dir.create(isic.net.dir, showWarnings = FALSE)
     
-    ## call all functions above with this line, creating a final long file
-    ## wiod_long_YEAR.csv to perform network analysis.
-    lapply(wiod.long.file.name, netCalcWrite, network.data.dir = network.data.dir, ctry = 0)
+    ## call the functions which calculate and write long files into the
+    ## net.dir.
+    lapply(wiod.long.file.name, netCalcWrite, net.data.dir = isic.net.dir, ctry = 0)
 
-    message("Run panelWIOD() to obtain the csv panel data file.")
+    message("Run panelWIOD(isic) to obtain the csv panel data file.")
 }
 
 #' Writing the calculated network file on disk.
@@ -64,24 +71,31 @@ netWIOD <- function(file.dir =  "./wiod_long_data", isic) {
 #' @param ctry control variable if the analysis is country based, 0 or
 #'     1.
 #' 
-netCalcWrite  <- function(wiod.long.file.name, network.data.dir, ctry) {
+netCalcWrite  <- function(wiod.long.file.name, net.data.dir, ctry) {
 
+    ## measuring the length of the file name and obtaining where year
+    ## info is on the file name.
+    file.name.length <- str_length(wiod.long.file.name)
+    year.start <- file.name.length - 7
+    year.end <- file.name.length - 4
+    
     if (ctry == 0) {
-        year <- substr(wiod.long.file.name, 28, 31)
+        year <- substr(wiod.long.file.name, year.start, year.end)
     } else if (ctry == 1) {
-        year <- substr(wiod.long.file.name, 38, 41)
+        year <- substr(wiod.long.file.name, year.start, year.end)
     }
     
     yearly.long.wiod <- get(load(wiod.long.file.name))
 
     ## remove the final market Z from the network calculation
-    yearly.long.wiod %<>% separate(target, c("target.country",
-                                            "target.industry"), sep = "\\.") %>% 
+    yearly.long.net.wiod <- yearly.long.wiod %>% separate(target, c("target.country",
+                                                                    "target.industry"),
+                                                          sep = "\\.") %>% 
         filter(target.industry != "Z") %>% unite("target",
                                                  "target.country",
                                                  "target.industry", sep = ".")
     
-    nc <- netCalc(yearly.long.wiod, ctry)
+    nc <- netCalc(yearly.long.net.wiod, ctry)
 
     ## create file names
     if (ctry == 0) {
@@ -90,7 +104,7 @@ netCalcWrite  <- function(wiod.long.file.name, network.data.dir, ctry) {
         file.name <- paste0(paste("wiod_ctry_network_scores", year, sep = "_"), ".rda")
     }
         
-    dir.file.name <- paste(network.data.dir, file.name, sep="/")
+    dir.file.name <- paste(net.data.dir, file.name, sep="/")
     ## write files with year
     save(nc, file = dir.file.name)
 
