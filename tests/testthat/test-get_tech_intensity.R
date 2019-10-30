@@ -4,9 +4,20 @@ test_that("create technology intensity dataframe", {
     ## between FRA and USA
     yearly.mini.raw <- get(load("./w2002.rda"))
 
-    tech.int <- getTechIntensity(yearly.mini.raw)
+    ## testing for each isic code
+    tech.int.0 <- getTechIntensity(yearly.mini.raw, 0)
+    tech.int.1 <- getTechIntensity(yearly.mini.raw, 1)
+    tech.int.2 <- getTechIntensity(yearly.mini.raw, 2)
 
-    expect_equal(dim(tech.int), c(69,2))
-    expect_equal(names(tech.int), c("RNr", "NewIndustryCode"))
+    expect_equal(dim(tech.int.0), c(69,2))
+    expect_equal(names(tech.int.0), c("RNr", "NewIndustryCode"))
+    
+    expect_equal(dim(tech.int.1), c(69,2))
+    expect_equal(names(tech.int.1), c("RNr", "NewIndustryCode"))
+
+    expect_equal(dim(tech.int.2), c(69,2))
+    expect_equal(names(tech.int.2), c("RNr", "NewIndustryCode"))
+
+    
     
 })
