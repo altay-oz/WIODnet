@@ -78,22 +78,25 @@ netCalcWrite  <- function(wiod.long.file.name, net.data.dir, ctry) {
     file.name.length <- str_length(wiod.long.file.name)
     year.start <- file.name.length - 7
     year.end <- file.name.length - 4
+
+    yearly.long.wiod <- readRDS(wiod.long.file.name)
     
     if (ctry == 0) {
         year <- substr(wiod.long.file.name, year.start, year.end)
+        
+        ## remove the final market Z from the network calculation
+        yearly.long.net.wiod <- yearly.long.wiod %>% separate(target, c("target.country",
+                                                                        "target.industry"),
+                                                              sep = "\\.") %>% 
+            filter(target.industry != "Z") %>% unite("target",
+                                                     "target.country",
+                                                     "target.industry", sep = ".")
     } else if (ctry == 1) {
         year <- substr(wiod.long.file.name, year.start, year.end)
-    }
-    
-    yearly.long.wiod <- readRDS(wiod.long.file.name)
 
-    ## remove the final market Z from the network calculation
-    yearly.long.net.wiod <- yearly.long.wiod %>% separate(target, c("target.country",
-                                                                    "target.industry"),
-                                                          sep = "\\.") %>% 
-        filter(target.industry != "Z") %>% unite("target",
-                                                 "target.country",
-                                                 "target.industry", sep = ".")
+        yearly.long.net.wiod <- yearly.long.wiod
+
+    }
     
     nc <- netCalc(yearly.long.net.wiod, ctry)
 

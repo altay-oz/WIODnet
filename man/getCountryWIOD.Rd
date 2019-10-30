@@ -4,19 +4,7 @@
 \alias{getCountryWIOD}
 \title{Create country based long tables and merge them to get a panel data set.}
 \usage{
-getCountryWIOD(long.dir = "./wiod_long_data",
-    country.long.dir = "./wiod_ctry_long_data", ctry.merge.dir =
-    "./yearly_ctry_merged_data")
-}
-\arguments{
-\item{long.dir}{directory where the long tables are already obtained,
-Default: "./wiod_long_data"}
-
-\item{country.long.dir}{directory where the long tables are recorded,
-Default: "./wiod_country_long_data"}
-
-\item{ctry.merge.dir}{directory where all tables are merged for each
-year, Default: "./wiod_country_long_data"}
+getCountryWIOD()
 }
 \description{
 Create country based long tables and merge them them to

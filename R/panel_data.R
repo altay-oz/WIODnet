@@ -90,7 +90,7 @@ bindFiles <- function(year, long.dir, net.dir, merge.dir, ctry) {
 
         file.name <- paste0(merge.dir, "/net_score_dom_int_VA_", year, ".rds")
     }
-    
+
     net.score.df <- readRDS(net.score.file)
     dom.int.trade.df <- readRDS(dom.int.trade.file)
     VA.df <- readRDS(VA.file)
@@ -107,7 +107,7 @@ bindFiles <- function(year, long.dir, net.dir, merge.dir, ctry) {
             left_join(dom.int.trade.df, by = "country") %>%
             left_join(VA.df, by = "country")
     }        
-    
+
     yearly.net.score.dom.int.VA.df$year <- year
     
     ##yearly.net.score.dom.int.VA.df  <- add_column(yearly.net.score.dom.int.VA.df,
