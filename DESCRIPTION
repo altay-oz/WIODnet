@@ -1,6 +1,6 @@
 Package: WIODnet
 Title: Creates long tables from WIOD data and carry network calculations
-Version: 0.7
+Version: 0.8
 Authors@R: c(
     person(given = "Altay",
            family = "Özaygen",
