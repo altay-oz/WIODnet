@@ -65,7 +65,7 @@ netWIOD <- function(isic) {
 #' @param wiod.long.file.name rda file containing the long network table
 #'     to read.
 #'
-#' @param network.data.dir directory where all network calculation files
+#' @param net.data.dir directory where all network calculation files
 #'     are stored.
 #'
 #' @param ctry control variable if the analysis is country based, 0 or

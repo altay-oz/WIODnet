@@ -10,11 +10,11 @@ netCalcWrite(wiod.long.file.name, net.data.dir, ctry)
 \item{wiod.long.file.name}{rda file containing the long network table
 to read.}
 
+\item{net.data.dir}{directory where all network calculation files
+are stored.}
+
 \item{ctry}{control variable if the analysis is country based, 0 or
 1.}
-
-\item{network.data.dir}{directory where all network calculation files
-are stored.}
 }
 \description{
 Calculate network scores for all industries for each
