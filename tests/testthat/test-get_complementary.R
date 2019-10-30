@@ -1,9 +1,9 @@
 test_that("complementary matrix", {
 
     ## complementary data
-    w2002.comp <- get(load("./wide_comp_w2002.rda"))
+    w2002.comp <- readRDS("./wide_comp_w2002.rds")
 
-    industry.RNr <- get(load("./rnr_industry.rda"))
+    industry.RNr <- readRDS("./rnr_industry.rds")
     
     va.df <- getComplementary(w2002.comp, industry.RNr, "VA")
     expadj.df <- getComplementary(w2002.comp, industry.RNr, "EXP_adj")

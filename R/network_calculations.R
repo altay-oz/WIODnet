@@ -85,7 +85,7 @@ netCalcWrite  <- function(wiod.long.file.name, net.data.dir, ctry) {
         year <- substr(wiod.long.file.name, year.start, year.end)
     }
     
-    yearly.long.wiod <- get(load(wiod.long.file.name))
+    yearly.long.wiod <- readRDS(wiod.long.file.name)
 
     ## remove the final market Z from the network calculation
     yearly.long.net.wiod <- yearly.long.wiod %>% separate(target, c("target.country",
@@ -99,14 +99,14 @@ netCalcWrite  <- function(wiod.long.file.name, net.data.dir, ctry) {
 
     ## create file names
     if (ctry == 0) {
-        file.name <- paste0(paste("wiod_network_scores", year, sep = "_"), ".rda")
+        file.name <- paste0(paste("wiod_network_scores", year, sep = "_"), ".rds")
     } else if (ctry == 1) {
-        file.name <- paste0(paste("wiod_ctry_network_scores", year, sep = "_"), ".rda")
+        file.name <- paste0(paste("wiod_ctry_network_scores", year, sep = "_"), ".rds")
     }
         
     dir.file.name <- paste(net.data.dir, file.name, sep="/")
     ## write files with year
-    save(nc, file = dir.file.name)
+    saveRDS(nc, file = dir.file.name)
 
     ## just printing where we are.
     message(paste("The network file for the year", year, "is ready."))

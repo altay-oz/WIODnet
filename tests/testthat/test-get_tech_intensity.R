@@ -2,7 +2,7 @@ test_that("create technology intensity dataframe", {
 
     ## loading the test data of the year 2002 WIOD for exchanges
     ## between FRA and USA
-    yearly.mini.raw <- get(load("./w2002.rda"))
+    yearly.mini.raw <- readRDS("./w2002.rds")
 
     ## testing for each isic code
     tech.int.0 <- getTechIntensity(yearly.mini.raw, 0)

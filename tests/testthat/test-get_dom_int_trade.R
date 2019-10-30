@@ -1,7 +1,7 @@
 context("calculation of domestic and international trade")
 
 ## long network table
-w2002.net.long <- get(load("./net_long_w2002.rda"))
+w2002.net.long <- readRDS("./net_long_w2002.rds")
 
 dom.int.fra.usa <- domIntTrade(w2002.net.long)
 

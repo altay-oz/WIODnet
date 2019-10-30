@@ -58,9 +58,9 @@ getLongTables <- function(file.name, dir.to.write, isic) {
     dom.int.weights <- domIntTrade(net.long)
     
     ## create file names
-    file.name.net <- paste0(paste("wiod_long", year, sep = "_"), ".rda")
-    file.name.VA <- paste0(paste("VA_long", year, sep = "_"), ".rda")
-    file.name.dom.int <- paste0(paste("dom_int_trade_long", year, sep = "_"), ".rda")
+    file.name.net <- paste0(paste("wiod_long", year, sep = "_"), ".rds")
+    file.name.VA <- paste0(paste("VA_long", year, sep = "_"), ".rds")
+    file.name.dom.int <- paste0(paste("dom_int_trade_long", year, sep = "_"), ".rds")
     
     ## writing all dataframes
     writeFile(net.long, file.name.net, dir.to.write)
@@ -74,7 +74,7 @@ getLongTables <- function(file.name, dir.to.write, isic) {
 
 writeFile <- function(df, file.name, dir.to.write) {
     dir.file <- paste(dir.to.write, file.name, sep="/")
-    save(df, file = dir.file)
+    saveRDS(df, file = dir.file)
 }
 
 

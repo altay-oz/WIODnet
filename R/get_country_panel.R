@@ -85,28 +85,28 @@ getCtryLong <- function(year,
     VA.file <- paste0(long.dir, "/VA_long_", year, ".rda")
     wiod.file  <- paste0(long.dir, "/wiod_long_", year, ".rda")       
 
-    ## loading files
-    dom.int <- get(load(dom.int.trade.file))
-    VA <- get(load(VA.file))
-    wiod <- get(load(wiod.file))
+    ## reading files
+    dom.int <- readRDS(dom.int.trade.file)
+    VA <- readRDS(VA.file)
+    wiod <- readRDS(wiod.file)
 
     ## extracting/creating and writing country base data
     dom.int.ctry <- dom.int %>% separate(country.ind, c("country", "ind"), sep = 3) %>% select(-ind)
     dom.int.ctry[is.na(dom.int.ctry)] <- 0
     dom.int.ctry %<>% group_by(country) %>% summarise_all(funs(sum))
-    save(dom.int.ctry, file = paste0(country.long.dir, "/dom_int_ctry_long_", year, ".rda"))
+    saveRDS(dom.int.ctry, file = paste0(country.long.dir, "/dom_int_ctry_long_", year, ".rda"))
     
     VA.ctry <- VA %>% separate(country.ind, c("country", "ind"), sep = 3) %>% select(-ind)
     VA.ctry[is.na(VA.ctry)] <- 0
     VA.ctry %<>% group_by(country) %>% summarise_all(funs(sum))
-    save(VA.ctry, file = paste0(country.long.dir, "/VA_ctry_long_", year, ".rda"))
+    saveRDS(VA.ctry, file = paste0(country.long.dir, "/VA_ctry_long_", year, ".rda"))
 
     wiod.ctry <- wiod %>% separate(source, c("source", "ind.source"), sep = 3) %>%
         select(-ind.source) %>% separate(target, c("target", "ind.target"), sep = 3) %>%
         select(-ind.target)
     wiod.ctry[is.na(wiod.ctry)] <- 0
     wiod.ctry %<>% group_by(source, target) %>% summarise_all(funs(sum))
-    save(wiod.ctry, file = paste0(country.long.dir, "/wiod_ctry_long_", year, ".rda"))
+    saveRDS(wiod.ctry, file = paste0(country.long.dir, "/wiod_ctry_long_", year, ".rda"))
 
     message(paste("Country based looooooong tables/files for the year", year,
                   "are ready."))

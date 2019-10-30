@@ -2,8 +2,8 @@ test_that("the technology intensity is merged with main df", {
 
     ## loading the test data of the year 2002 WIOD for exchanges
     ## between FRA and USA
-    yearly.mini.raw <- get(load("./w2002.rda"))
-    rnr.ind.test <- get(load("./rnr_industry.rda"))
+    yearly.mini.raw <- readRDS("./w2002.rds")
+    rnr.ind.test <- readRDS("./rnr_industry.rds")
 
     list.tech.int <- addTechIntensity(yearly.mini.raw, 2)
 
@@ -28,6 +28,3 @@ test_that("the technology intensity is merged with main df", {
     # test RNr and IndustryCode
     expect_equal(row.count.func, row.count.out)
 })
-
-
-
