@@ -4,20 +4,10 @@
 \alias{panelWIOD}
 \title{Merge all to create a panel data for analysis.}
 \usage{
-panelWIOD(long.dir = "./wiod_long_data", net.dir =
-    "./wiod_network_data", merge.dir = "./yearly_merged_data")
+panelWIOD(isic)
 }
 \arguments{
 \item{isic}{parameter to be given for the aggregation of the industries.}
-
-\item{long.dir}{directory where the long tables are recorded,
-Default: "./wiod_long_data"}
-
-\item{net.dir}{directory where the long tables on network
-calculations are recorded, Default: "./wiod_network_data"}
-
-\item{merge.dir}{directory where the long tables are all merged by
-year basis, Default: "./yearly_merged_data"}
 }
 \description{
 Merge all long tables to create a panel data in csv form
@@ -25,6 +15,6 @@ Merge all long tables to create a panel data in csv form
 }
 \examples{
 # Merge all long tables using default values.
-\dontrun{panelWIOD()}
+\dontrun{panelWIOD(2)}
 
 }

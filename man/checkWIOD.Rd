@@ -8,6 +8,8 @@ checkWIOD(original.file, download.dir)
 }
 \arguments{
 \item{original.file}{the zip file downloaded.}
+
+\item{download.dir}{directory where the zip file is saved}
 }
 \description{
 Check the integrity of the zip file with the md5sum

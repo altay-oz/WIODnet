@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculate_network.R
 \name{netCalc}
 \alias{netCalc}
-\title{Network calculation for each year}
+\title{Network calculation for a data frame with source - target - weight.}
 \usage{
 netCalc(wiod.net.df, ctry)
 }

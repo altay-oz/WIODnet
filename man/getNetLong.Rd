@@ -8,6 +8,8 @@ getNetLong(yearly.IO, industry.RNr)
 }
 \arguments{
 \item{yearly.IO}{network matrix among industries obtained from the raw data.}
+
+\item{industry.RNr}{data frame which includes industry code and RNr info.}
 }
 \value{
 data frame

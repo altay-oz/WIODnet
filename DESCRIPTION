@@ -28,6 +28,7 @@ Imports:
     dplyr,
     igraph,
     magrittr,
+    stringr,
     tibble,
     tidyr,
     tools,
