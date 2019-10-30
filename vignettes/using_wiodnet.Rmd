@@ -18,19 +18,58 @@ knitr::opts_chunk$set(
 library(WIODnet)
 ```
 
-There are three functions to call;
+# Using WIODnet
 
-* getWIOD() this function download the WIOD data into wiod_original_data
-  and creates long tables for each year in wiod_long_data.
+This package aims to help researchers using [WIOD
+data](http://www.wiod.org/home). WIOD (World Input Output Data) is a
+collection of input output tables covering 43 countries and a model for
+the rest of the world (RoW), 56 sectors classified according to he
+International Standard Industrial Classification revision 4 (ISIC
+Rev. 4) for the period of 2000-2016.
 
-* netWIOD() makes the network calculation on the long tables which are
-  created with getWIOD().
+This package download the zip file provided at the [download
+section](http://www.wiod.org/database/wiots16), check its integrity,
+create long tables, record them on the working directory and carry out
+network analysis and finally create a panel data comprising all
+information obtained from WIOD tables.
 
-* panelWIOD() merges all long tables and provide a single panel data
-  file in csv.
+Using the isic parameter in the functions; it is possible to obtain
+final panel data with industries aggregated at different levels. All
+nodes are country-industry pairs.
 
-* getCountryWIOD() use WIOD data to provide a panel data consisting of
-  countries.
+1. isic = 0
+
+    There is no aggregation in industries. All nodes are
+    country-industry pairs as given in the original files.
+   
+2. isic = 1
+
+   The aggregation is carried out at the level of ISIC 1 digit code. 
+
+3. isic = 2
+
+   The aggregation is only made for the manufacturing industry according
+   to the [Eurostat technology intensity
+   classification](https://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:High-tech_classification_of_manufacturing_industries)
+
+
+WIODnet package provides four functions to users. All functions creates
+directories and the final panelWIOD(isic) gives panel data in csv
+format. The last function getCountryWIOD provides a panel data in which
+there is no industry, all I-O is country based.
+
+1. getWIOD(isic) this function download the WIOD data into
+   wiod_original_data and creates long tables for each year in
+   wiod_long_data.
+
+2. netWIOD(isic) makes the network calculation on the long tables which
+   are created with getWIOD().
+
+3. panelWIOD(isic) merges all long tables and provide a single panel data
+   file in csv.
+
+4. getCountryWIOD() use WIOD data to provide a panel data consisting of
+   countries.
 
 If you are using this package multiple times, better to stick to work
 always on the same directory, else you will download the same +600 MB
