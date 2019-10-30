@@ -5,6 +5,8 @@
 #'     country code in three character and industry.
 #'
 #' @param yearly.IO network matrix among industries obtained from the raw data.
+#'
+#' @param industry.RNr data frame which includes industry code and RNr info. 
 #' 
 #' @return data frame
 #'

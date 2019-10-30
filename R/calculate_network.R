@@ -114,7 +114,7 @@ netCalcWrite  <- function(wiod.long.file.name, net.data.dir, ctry) {
 }
 
 
-#' Network calculation for each year
+#' Network calculation for a data frame with source - target - weight.
 #'
 #' @description Calculate network scores of long files obtained from
 #'     WIOD. The weight is filtered with 0.05 (for now).

@@ -41,6 +41,8 @@ downloadWIOD <- function(download.dir) {
 #'
 #' @param original.file the zip file downloaded.
 #'
+#' @param download.dir directory where the zip file is saved
+#' 
 #' @importFrom tools md5sum
 #' 
 checkWIOD <- function(original.file, download.dir) {

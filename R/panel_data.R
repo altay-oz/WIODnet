@@ -3,25 +3,16 @@
 #' @description Merge all long tables to create a panel data in csv form
 #'     based on WIOD downloaded data.
 #' 
-#' @usage panelWIOD(long.dir = "./wiod_long_data", net.dir =
-#'     "./wiod_network_data", merge.dir = "./yearly_merged_data")
-#'
-#' @param long.dir directory where the long tables are recorded,
-#'     Default: "./wiod_long_data"
-#'
-#' @param net.dir directory where the long tables on network
-#'     calculations are recorded, Default: "./wiod_network_data"
-#'
-#' @param merge.dir directory where the long tables are all merged by
-#'     year basis, Default: "./yearly_merged_data"
+#' @usage panelWIOD(isic)
 #'
 #' @param isic parameter to be given for the aggregation of the industries.
 #' 
 #' @examples
 #' # Merge all long tables using default values.
-#' \dontrun{panelWIOD()}
+#' \dontrun{panelWIOD(2)}
 #'
 #' @export
+#' 
 panelWIOD <- function(isic) {
 
     ## Creating directories wrt isic code given and check if they are
