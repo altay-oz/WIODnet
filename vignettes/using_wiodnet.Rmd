@@ -14,12 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Using WIODnet
+
 ```{r setup}
 library(WIODnet)
 ```
-
-# Using WIODnet
-
 This package aims to help researchers using [WIOD
 data](http://www.wiod.org/home). WIOD (World Input Output Data) is a
 collection of input output tables covering 43 countries and a model for
