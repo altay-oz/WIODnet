@@ -180,21 +180,11 @@ netCalc <- function(wiod.net.df, ctry) {
     eigen.cent <- rownames_to_column(as.data.frame(eigen.cent), var = node.type)
     eigen.cent[is.na(eigen.cent)] <- 0
 
-    ## authority, 
-    auth <- authority_score(g)$vector
-    auth <- rownames_to_column(as.data.frame(auth), var = node.type)
-    auth[is.na(auth)] <- 0
-
-    ## hub
-    hub <- hub_score(g)$vector
-    hub <- rownames_to_column(as.data.frame(hub), var = node.type)
-    hub[is.na(hub)] <- 0
-
     net.scores <- Reduce(function(x, y) merge(x = x, y = y, by = node.type,
                                               all.x = TRUE),
                          list(wiod.nodes, strength.all,
                               strength.out, strength.in, btw,
-                              page.rank, eigen.cent, auth, hub))
+                              page.rank, eigen.cent))
     
     return(net.scores)
 }
